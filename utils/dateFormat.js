@@ -1,5 +1,5 @@
 module.exports = (timestamp) => {
-    const dateObj = newDate(timestamp);
+    const dateObj = new Date(timestamp);
     
     return dateObj;
 } 
