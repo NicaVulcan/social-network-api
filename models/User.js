@@ -36,7 +36,7 @@ const UserSchema = new Schema(
 );
 
 // get total count of thoughts on retrieval
-ThoughtSchema.virtual('thoughtCount').get(function () {
+UserSchema.virtual('thoughtCount').get(function () {
     return this.thoughts.length;
 });
 
