@@ -41,22 +41,23 @@ const thoughtController = {
             });
     },
     // create new thought
-    // createThought({ params, body }, res){
-    //     Thought.create(body)
-    //         .then(( thoughtData ) => {
-    //             console.log(thoughtData._id);
-    //             console.log(params.id);
-    //             res.json(thoughtData);
-             
-    //             return User.findByIdAndUpdate(
-    //                 { _id: params.userId },
-    //                 { $push: { thoughts: thoughtData._id } },
-    //                 { new: true } 
-    //             )
-    //         })
-    //         .catch(err => res.status(400).json(err));
-    // },
-    // },
+    createThought({ params, body }, res){
+        Thought.create(body)
+            .then(thoughtData => {
+                return User.findByIdAndUpdate(
+                    { _id: params.userId },
+                    { $push: { thoughts: thoughtData._id } },
+                    { new: true }
+                );
+            })
+            .then(userData => {
+                if (!userData) {
+                    res.status(400).json({ message: 'User not found!' });
+                    return;
+                }
+                res.json(userData);
+            })
+    },
     // edit existing thought by id
     updateThought({ params, body }, res){
         Thought.findByIdAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
