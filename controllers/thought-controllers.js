@@ -20,7 +20,7 @@ const thoughtController = {
     },
     // get thought by id
     getThoughtById({ params }, res){
-        Thought.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.thoughtId })
             .populate(
                 {
                     path: 'reactions',
@@ -60,7 +60,7 @@ const thoughtController = {
     },
     // edit existing thought by id
     updateThought({ params, body }, res){
-        Thought.findByIdAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+        Thought.findByIdAndUpdate({ _id: params.thoughtId }, body, { new: true, runValidators: true })
             .then(thoughtData => {
                 if (!thoughtData) {
                     res.status(400).json({ message: 'Thought not found!' });
@@ -75,7 +75,7 @@ const thoughtController = {
     },
     // remove thought by id
     removeThought({ params }, res){
-        Thought.findOneAndDelete({ _id: params.id })
+        Thought.findOneAndDelete({ _id: params.thoughtId })
             .then(thoughtData => {
                 if (!thoughtData) {
                     res.status(400).json({ message: 'Thought not found!' });
@@ -93,7 +93,7 @@ const thoughtController = {
     // add reaction
     addReaction({ params, body }, res){
         Thought.findByIdAndUpdate(
-        { _id: params.id },
+        { _id: params.thoughtId },
         { $push: { reactions: body} },
         { new: true, runValidators: true }
         )
@@ -112,8 +112,8 @@ const thoughtController = {
     // remove reaction
     removeReaction({ params }, res){
         Thought.findByIdAndUpdate(
-            { _id: params.userId },
-            { $pull: { reactions: params.id } },
+            { _id: params.thoughtId },
+            { $pull: { reactions: { _id: params.reactionId } } },
             { new: true }
         )
             .then(thoughtData => {
