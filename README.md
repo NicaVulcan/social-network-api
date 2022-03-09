@@ -32,6 +32,6 @@ npm start
 You are now able to test the API endpoints.
 ## Walkthrough
 Please click on the following image to view a demonstration of the application:
-[![screenshot of API routes tests](/assets/images/social-media-api.png)](https://drive.google.com/file/d/1Ck9vudbZKMF3miUWi7p-7ellPbgE3Q3e/view?usp=sharing)
+[![screenshot of API routes tests](/assets/images/social-media-api.png)](https://drive.google.com/file/d/1k3fdG-Lt4U_0wCviPe623y1b4h_gvidu/view?usp=sharing)
 ## Contribution
 Created by CSM
